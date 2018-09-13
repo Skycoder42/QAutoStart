@@ -2,6 +2,7 @@
 #define TESTWIDGET_H
 
 #include <QWidget>
+#include <qautostart.h>
 
 namespace Ui {
 class TestWidget;
@@ -19,6 +20,7 @@ public:
 
 private:
 	Ui::TestWidget *ui;
+	QAutoStart *_autostart;
 };
 
 #endif // TESTWIDGET_H
