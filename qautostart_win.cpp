@@ -13,7 +13,10 @@ bool QAutoStartPrivate::setAutoStartEnabled(bool autoStartEnabled)
 	if(_settings->isWritable()) {
 		const auto current = _settings->contains(startId);
 		if(current != autoStartEnabled) {
-			_settings->setValue(startId, createCommand());
+			if(autoStartEnabled)
+				_settings->setValue(startId, createCommand());
+			else
+				_settings->remove(startId);
 			_settings->sync();
 			return true;
 		} else
