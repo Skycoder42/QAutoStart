@@ -24,5 +24,5 @@ TestWidget::~TestWidget()
 
 void TestWidget::setAutoStarted()
 {
-	ui->label->setText(tr("Started automatically"));
+	ui->label->setText(tr("Started <b>automatically</b>"));
 }

@@ -19,7 +19,6 @@ bool QAutoStartPrivate::setAutoStartEnabled(bool autoStartEnabled)
 			if(!launchFile.open(QIODevice::WriteOnly | QIODevice::Text))
 				return false;
 
-			//TODO conver to use QSettings instead
 			QXmlStreamWriter writer{&launchFile};
 			writer.setAutoFormatting(true);
 			writer.setAutoFormattingIndent(-1);
