@@ -25,7 +25,7 @@ bool QAutoStartPrivate::setAutoStartEnabled(bool autoStartEnabled)
 			writer.setCodec("UTF-8");
 
 			writer.writeStartDocument(QStringLiteral("1.0"));
-			writer.writeDTD(QStringLiteral("plist PUBLIC -//Apple Computer//DTD PLIST 1.0//EN http://www.apple.com/DTDs/PropertyList-1.0.dtd"));
+			writer.writeDTD(QStringLiteral("<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">"));
 			writer.writeStartElement(QStringLiteral("plist"));
 			writer.writeAttribute(QStringLiteral("version"), QStringLiteral("1.0"));
 			writer.writeStartElement(QStringLiteral("dict"));
@@ -41,10 +41,7 @@ bool QAutoStartPrivate::setAutoStartEnabled(bool autoStartEnabled)
 			writer.writeEndElement();
 
 			writer.writeTextElement(QStringLiteral("key"), QStringLiteral("RunAtLoad"));
-			writer.writeTextElement(QStringLiteral("boolean"), QStringLiteral("true"));
-
-			writer.writeTextElement(QStringLiteral("key"), QStringLiteral("KeepAlive"));
-			writer.writeTextElement(QStringLiteral("boolean"), QStringLiteral("true"));
+			writer.writeEmptyElement(QStringLiteral("true"));
 
 			writer.writeTextElement(QStringLiteral("key"), QStringLiteral("ProcessType"));
 			if(!extraProperties.contains(QAutoStart::Interactive))
