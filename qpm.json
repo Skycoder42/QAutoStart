@@ -1,0 +1,22 @@
+{
+    "author": {
+        "email": "skycoder42.de@gmx.de",
+        "name": "Skycoder"
+    },
+    "dependencies": [
+    ],
+    "description": "A class to easily register your application as autostart application",
+    "license": "BSD_3_CLAUSE",
+    "name": "de.skycoder42.qautostart",
+    "pri_filename": "qautostart.pri",
+    "repository": {
+        "type": "GIT",
+        "url": "https://github.com/Skycoder42/QtAutoStart.git"
+    },
+    "version": {
+        "fingerprint": "",
+        "label": "1.0.0",
+        "revision": ""
+    },
+    "webpage": "https://github.com/Skycoder42/QtAutoStart"
+}
