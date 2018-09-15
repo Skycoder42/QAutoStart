@@ -27,8 +27,11 @@ bool QAutoStartPrivate::setAutoStartEnabled(bool autoStartEnabled)
 
 void QAutoStartPrivate::createSettings()
 {
-	if(!_settings)
-		_settings = new QSettings{QStringLiteral("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"), QSettings::NativeFormat, q_ptr};
-	else
+	if(!_settings) {
+		if(extraProperties.contains(QAutoStart::CustomLocation))
+			_settings = new QSettings{extraProperties.value(QAutoStart::CustomLocation).toString(), QSettings::NativeFormat, q_ptr};
+		else
+			_settings = new QSettings{QStringLiteral("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"), QSettings::NativeFormat, q_ptr};
+	} else
 		_settings->sync();
 }

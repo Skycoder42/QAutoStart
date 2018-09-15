@@ -66,9 +66,15 @@ bool QAutoStartPrivate::setAutoStartEnabled(bool autoStartEnabled)
 
 QString QAutoStartPrivate::launchAgentFilePath() const
 {
-	auto launchDir = QDir::home();
-	const auto subDir = QStringLiteral("Library/LaunchAgents");
-	launchDir.mkpath(subDir);
-	launchDir.cd(subDir);
+	QDir launchDir;
+	if(extraProperties.contains(QAutoStart::CustomLocation)) {
+		launchDir = extraProperties.value(QAutoStart::CustomLocation).toString();
+		launchDir.mkpath(QStringLiteral("."));
+	} else {
+		launchDir = QDir::home();
+		const auto subDir = QStringLiteral("Library/LaunchAgents");
+		launchDir.mkpath(subDir);
+		launchDir.cd(subDir);
+	}
 	return launchDir.absoluteFilePath(startId + QStringLiteral(".plist"));
 }

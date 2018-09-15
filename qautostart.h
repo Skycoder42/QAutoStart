@@ -24,7 +24,8 @@ public:
 		DisplayName,
 		IconName,
 		Comment,
-		Interactive
+		Interactive,
+		CustomLocation
 	};
 	Q_ENUM(PropertyKey)
 

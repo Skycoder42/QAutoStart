@@ -2,6 +2,7 @@
 #include <QStandardPaths>
 #include <QFile>
 #include <QTextStream>
+#include <QDir>
 
 bool QAutoStartPrivate::isAutoStartEnabled()
 {
@@ -42,6 +43,15 @@ bool QAutoStartPrivate::setAutoStartEnabled(bool autoStartEnabled)
 
 QString QAutoStartPrivate::desktopFilePath() const
 {
-	return QStringLiteral("%1/autostart/%2.desktop")
-			.arg(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation), startId);
+	QDir configDir;
+	if(extraProperties.contains(QAutoStart::CustomLocation)) {
+		configDir = extraProperties.value(QAutoStart::CustomLocation).toString();
+		configDir.mkpath(QStringLiteral("."));
+	} else {
+		configDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+		const auto subDir = QStringLiteral("autostart");
+		configDir.mkpath(subDir);
+		configDir.cd(subDir);
+	}
+	return configDir.absoluteFilePath(startId + QStringLiteral(".desktop"));
 }
